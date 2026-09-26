@@ -1,0 +1,74 @@
+*chandini 2024102020
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+Vdd vdd gnd 'SUPPLY'
+
+
+* SPICE3 file created from d_flipflop.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 a_n8_n39# d gnd Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=200 ps=120
+M1001 a_60_n8# a_27_n8# vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=400 ps=200
+M1002 a_60_n8# clk a_60_n39# Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=100 ps=40
+M1003 a_n8_n8# d vdd vdd CMOSP w=20 l=2
++  ad=200 pd=60 as=0 ps=0
+M1004 a_27_n8# clk vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1005 a_27_n39# clk gnd Gnd CMOSN w=10 l=2
++  ad=100 pd=40 as=0 ps=0
+M1006 a_n8_n39# clk a_n8_n8# vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1007 a_27_n8# a_n8_n39# a_27_n39# Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=0 ps=0
+M1008 q a_60_n8# gnd Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=0 ps=0
+M1009 q a_60_n8# vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1010 a_60_n39# a_27_n8# gnd Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 a_60_n8# q 0.05fF
+C1 vdd q 0.29fF
+C2 gnd clk 0.23fF
+C3 a_27_n8# a_n8_n39# 0.05fF
+C4 a_27_n8# vdd 0.57fF
+C5 gnd q 0.14fF
+C6 vdd d 0.06fF
+C7 vdd a_60_n8# 0.58fF
+C8 vdd a_n8_n39# 0.06fF
+C9 a_27_n8# gnd 0.02fF
+C10 d clk 0.24fF
+C11 gnd d 0.05fF
+C12 gnd a_60_n8# 0.02fF
+C13 a_n8_n39# clk 0.30fF
+C14 gnd a_n8_n39# 0.27fF
+C15 vdd clk 0.15fF
+C16 gnd Gnd 0.41fF
+C17 q Gnd 0.08fF
+C18 a_n8_n39# Gnd 0.34fF
+C19 a_60_n8# Gnd 0.24fF
+C20 a_27_n8# Gnd 0.08fF
+C21 clk Gnd 0.28fF
+C22 d Gnd 0.18fF
+C23 vdd Gnd 4.61fF
+
+vclk clk gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vd d gnd pulse 0 1.8 0 0.1n 0.1n 7n 14n
+.tran 0.01n 80n
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(clk) v(d)+2 v(q)+4
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
