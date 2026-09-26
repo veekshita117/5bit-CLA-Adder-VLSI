@@ -1,0 +1,55 @@
+* chandini 2024102020
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+* SPICE3 file created from or2.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 out nout vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=300 ps=140
+M1001 a_n6_n23# a vdd vdd CMOSP w=40 l=2
++  ad=400 pd=100 as=0 ps=0
+M1002 out nout gnd Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=150 ps=90
+M1003 nout a gnd Gnd CMOSN w=10 l=2
++  ad=100 pd=40 as=0 ps=0
+M1004 nout b a_n6_n23# vdd CMOSP w=40 l=2
++  ad=200 pd=90 as=0 ps=0
+M1005 gnd b nout Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 a vdd 0.06fF
+C1 nout out 0.05fF
+C2 out gnd 0.13fF
+C3 nout b 0.24fF
+C4 out vdd 0.28fF
+C5 a b 0.26fF
+C6 nout a 0.05fF
+C7 nout gnd 0.35fF
+C8 vdd b 0.06fF
+C9 nout vdd 0.24fF
+C10 a gnd 0.05fF
+C11 gnd Gnd 0.26fF
+C12 out Gnd 0.08fF
+C13 nout Gnd 0.29fF
+C14 b Gnd 0.23fF
+C15 a Gnd 0.20fF
+C16 vdd Gnd 3.73fF
+Vdd vdd gnd 'SUPPLY'
+va a gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vb b gnd pulse 0 1.8 0 0.1n 0.1n 20n 40n
+
+.tran  0.01n 100ns
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(a) v(b)+2 v(out)+4
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
