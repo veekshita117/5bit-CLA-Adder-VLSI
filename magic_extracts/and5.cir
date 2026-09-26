@@ -1,0 +1,89 @@
+* chandini 2024102020
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+Vdd vdd gnd 'SUPPLY'
+* SPICE3 file created from and5.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 nout a vdd vdd CMOSP w=20 l=2
++  ad=500 pd=170 as=600 ps=220
+M1001 nout c vdd vdd CMOSP w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1002 a_n8_n101# d a_n20_n101# Gnd CMOSN w=50 l=2
++  ad=500 pd=120 as=500 ps=120
+M1003 a_4_n101# c a_n8_n101# Gnd CMOSN w=50 l=2
++  ad=500 pd=120 as=0 ps=0
+M1004 a_n20_n101# e gnd Gnd CMOSN w=50 l=2
++  ad=0 pd=0 as=300 ps=140
+M1005 nout e vdd vdd CMOSP w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1006 out nout vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1007 a_16_n101# b a_4_n101# Gnd CMOSN w=50 l=2
++  ad=500 pd=120 as=0 ps=0
+M1008 vdd d nout vdd CMOSP w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1009 out nout gnd Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=0 ps=0
+M1010 vdd b nout vdd CMOSP w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1011 nout a a_16_n101# Gnd CMOSN w=50 l=2
++  ad=250 pd=110 as=0 ps=0
+C0 b e 0.08fF
+C1 b nout 0.06fF
+C2 c a 0.08fF
+C3 vdd a 0.06fF
+C4 e d 0.25fF
+C5 nout d 0.14fF
+C6 out nout 0.05fF
+C7 b d 0.08fF
+C8 e a 0.08fF
+C9 nout a 0.12fF
+C10 nout gnd 0.06fF
+C11 vdd c 0.06fF
+C12 b a 0.58fF
+C13 d a 0.08fF
+C14 out gnd 0.13fF
+C15 e c 0.08fF
+C16 vdd e 0.06fF
+C17 nout c 0.06fF
+C18 vdd nout 1.45fF
+C19 gnd a 0.05fF
+C20 b c 0.58fF
+C21 b vdd 0.06fF
+C22 d c 0.41fF
+C23 vdd d 0.06fF
+C24 nout e 0.03fF
+C25 vdd out 0.28fF
+C26 gnd Gnd 0.70fF
+C27 out Gnd 0.05fF
+C28 nout Gnd 0.49fF
+C29 a Gnd 0.44fF
+C30 b Gnd 0.41fF
+C31 c Gnd 0.38fF
+C32 d Gnd 0.34fF
+C33 e Gnd 0.30fF
+C34 vdd Gnd 4.25fF
+
+va a gnd pulse 0 1.8 0 0.1n 0.1n 5n 10n
+vb b gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vc c gnd pulse 0 1.8 0 0.1n 0.1n 20n 40n
+vd d gnd pulse 0 1.8 0 0.1n 0.1n 40n 80n
+ve e gnd pulse 0 1.8 0 0.1n 0.1n 80n 160n
+.tran 0.01n 200n
+
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(a) v(b)+2 v(c)+4 v(d)+6 v(e)+8 v(out)+10
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
