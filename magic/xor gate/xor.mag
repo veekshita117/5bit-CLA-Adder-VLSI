@@ -1,0 +1,114 @@
+magic
+tech scmos
+timestamp 1731775995
+<< nwell >>
+rect -31 -22 29 36
+<< ntransistor >>
+rect -20 -81 -18 -61
+rect -8 -81 -6 -61
+rect 4 -81 6 -61
+rect 16 -81 18 -61
+<< ptransistor >>
+rect -20 -16 -18 24
+rect -8 -16 -6 24
+rect 4 -16 6 24
+rect 16 -16 18 24
+<< ndiffusion >>
+rect -21 -81 -20 -61
+rect -18 -81 -8 -61
+rect -6 -81 -5 -61
+rect 3 -81 4 -61
+rect 6 -81 16 -61
+rect 18 -81 19 -61
+<< pdiffusion >>
+rect -21 -16 -20 24
+rect -18 -16 -8 24
+rect -6 -16 -5 24
+rect 3 -16 4 24
+rect 6 -16 16 24
+rect 18 -16 19 24
+<< ndcontact >>
+rect -25 -81 -21 -61
+rect -5 -81 3 -61
+rect 19 -81 23 -61
+<< pdcontact >>
+rect -25 -16 -21 24
+rect -5 -16 3 24
+rect 19 -16 23 24
+<< psubstratepcontact >>
+rect -25 -90 -21 -86
+rect -15 -90 -11 -86
+rect -3 -90 1 -86
+rect 9 -90 13 -86
+rect 19 -90 23 -86
+<< nsubstratencontact >>
+rect -25 29 -21 33
+rect -15 29 -11 33
+rect -3 29 1 33
+rect 8 29 12 33
+rect 19 29 23 33
+<< polysilicon >>
+rect -20 24 -18 27
+rect -8 24 -6 27
+rect 4 24 6 27
+rect 16 24 18 27
+rect -20 -28 -18 -16
+rect -8 -35 -6 -16
+rect 4 -28 6 -16
+rect 16 -35 18 -16
+rect -20 -61 -18 -53
+rect -8 -61 -6 -46
+rect 4 -61 6 -54
+rect 16 -61 18 -45
+rect -20 -84 -18 -81
+rect -8 -84 -6 -81
+rect 4 -84 6 -81
+rect 16 -84 18 -81
+<< polycontact >>
+rect -24 -27 -20 -23
+rect -12 -34 -8 -30
+rect 6 -27 10 -23
+rect 18 -34 22 -30
+rect -12 -51 -8 -47
+rect -24 -58 -20 -54
+rect 6 -58 10 -54
+rect 18 -51 22 -47
+<< metal1 >>
+rect -21 29 -15 33
+rect -11 29 -3 33
+rect 1 29 8 33
+rect 12 29 19 33
+rect -25 28 23 29
+rect -25 24 -21 28
+rect 19 24 23 28
+rect -31 -27 -24 -23
+rect -31 -34 -12 -30
+rect -5 -38 3 -16
+rect 10 -27 29 -23
+rect 22 -34 29 -30
+rect -5 -43 29 -38
+rect -31 -51 -12 -47
+rect -31 -58 -24 -54
+rect -5 -61 3 -43
+rect 22 -51 29 -47
+rect 10 -58 29 -54
+rect -25 -85 -21 -81
+rect 19 -85 23 -81
+rect -25 -86 23 -85
+rect -21 -90 -15 -86
+rect -11 -90 -3 -86
+rect 1 -90 9 -86
+rect 13 -90 19 -86
+<< labels >>
+rlabel metal1 3 30 6 32 5 vdd
+rlabel metal1 -30 -26 -28 -24 3 a
+rlabel metal1 -30 -33 -28 -31 3 bbar
+rlabel metal1 25 -26 27 -24 7 b
+rlabel metal1 25 -33 27 -31 7 abar
+rlabel metal1 3 -89 6 -87 1 gnd
+rlabel metal1 -29 -57 -27 -55 3 a
+rlabel metal1 -29 -50 -27 -48 3 b
+rlabel metal1 25 -50 27 -48 7 abar
+rlabel metal1 25 -57 27 -55 7 bbar
+rlabel metal1 24 -41 26 -39 7 out
+<< end >>
