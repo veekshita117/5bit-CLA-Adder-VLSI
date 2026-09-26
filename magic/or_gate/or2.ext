@@ -1,0 +1,32 @@
+timestamp 1731572940
+version 8.3
+tech scmos
+style TSMC0.18um(tsmc18)from:t11b
+scale 1000 1 9
+resistclasses 6700 7500 929000 929000 1 7700 7700 80 80 80 70 70 40
+node "gnd" 183 259.651 -13 -67 poc 150 90 64 64 0 0 0 0 0 0 0 0 0 0 435 210 0 0 0 0 0 0 0 0 0 0
+node "out" 45 79.38 31 -51 ndif 50 30 100 50 0 0 0 0 0 0 0 0 0 0 228 122 0 0 0 0 0 0 0 0 0 0
+node "nout" 292 294.051 -6 -57 ndif 100 40 200 90 0 0 0 0 0 0 132 128 0 0 460 216 0 0 0 0 0 0 0 0 0 0
+node "a_n6_n23#" 30 0 -6 -23 pdif 0 0 400 100 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "b" 309 241.367 -1 -37 pc 0 0 0 0 0 0 0 0 0 0 180 174 0 0 96 56 0 0 0 0 0 0 0 0 0 0
+node "a" 308 208.691 -13 -44 pc 0 0 0 0 0 0 0 0 0 0 180 174 0 0 48 32 0 0 0 0 0 0 0 0 0 0
+node "vdd" 1415 3732.35 -20 -29 nw 64 64 300 140 3716 246 0 0 0 0 0 0 0 0 590 292 0 0 0 0 0 0 0 0 0 0
+cap "b" "nout" 242.157
+cap "a" "gnd" 54.984
+cap "a" "vdd" 64.77
+cap "out" "gnd" 127.15
+cap "out" "vdd" 280.603
+cap "a" "b" 259.654
+cap "nout" "gnd" 346.399
+cap "a" "nout" 54.984
+cap "b" "vdd" 64.77
+cap "vdd" "nout" 237.369
+cap "out" "nout" 54.984
+fet nfet 29 -51 30 -50 20 24 "Gnd!" "nout" 4 0 "gnd" 10 0 "out" 10 0
+fet nfet 4 -57 5 -56 20 24 "Gnd!" "b" 4 0 "nout" 10 0 "gnd" 10 0
+fet nfet -8 -57 -7 -56 20 24 "Gnd!" "a" 4 0 "gnd" 10 0 "nout" 10 0
+fet pfet 29 -21 30 -20 40 44 "vdd" "nout" 4 0 "vdd" 20 0 "out" 20 0
+fet pfet 4 -23 5 -22 80 84 "vdd" "b" 4 0 "a_n6_n23#" 40 0 "nout" 40 0
+fet pfet -8 -23 -7 -22 80 84 "vdd" "a" 4 0 "vdd" 40 0 "a_n6_n23#" 40 0
+subcap "b" -6.5352
+subcap "a" -6.5352
