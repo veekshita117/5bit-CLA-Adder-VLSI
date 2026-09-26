@@ -1,0 +1,74 @@
+*chandini 2024102020
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+Vdd vdd gnd 'SUPPLY'
+
+
+M1000 vdd abar a_6_n16# vdd CMOSP w=40 l=2
++  ad=0.2n pd=90u as=0.2n ps=50u
+M1001 a_n18_n16# a vdd vdd CMOSP w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=90u
+M1002 gnd abar a_6_n81# Gnd CMOSN w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1003 a_6_n16# b out vdd CMOSP w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=50u
+M1004 out bbar a_n18_n16# vdd CMOSP w=40 l=2
++  ad=0.2n pd=50u as=0.2n ps=50u
+M1005 a_n18_n81# a gnd Gnd CMOSN w=20 l=2
++  ad=100p pd=30u as=100p ps=50u
+M1006 a_6_n81# bbar out Gnd CMOSN w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1007 out b a_n18_n81# Gnd CMOSN w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+C0 gnd a_n18_n81# 2.27e-19
+C1 bbar gnd 0.05598f
+C2 a bbar 0.152012f
+C3 b abar 0.174076f
+C4 out bbar 0.119406f
+C5 vdd a 0.044473f
+C6 vdd out 0.097974f
+C7 gnd a_6_n81# 2.27e-19
+C8 abar gnd 0.001695f
+C9 b gnd 9.68e-19
+C10 out abar 0.228501f
+C11 b a 0.152012f
+C12 vdd bbar 0.019989f
+C13 out b 0.119769f
+C14 vdd a_6_n16# 2.27e-19
+C15 bbar a_6_n81# 1.7e-19
+C16 a gnd 0.056679f
+C17 bbar abar 0.174076f
+C18 out gnd 0.082521f
+C19 a_6_n16# b 3.39e-20
+C20 vdd abar 0.020716f
+C21 vdd b 0.043994f
+C22 vdd a_n18_n16# 2.27e-19
+C23 gnd 0 0.24659f 
+C24 abar 0 0.330897f 
+C25 bbar 0 0.375679f 
+C26 a 0 0.272984f 
+C27 b 0 0.38123f 
+C28 out 0 0.364076f 
+C29 vdd 0 3.75954f 
+
+va a gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vaa abar gnd pulse 1.8 0 0 0.1n 0.1n 10n 20n
+vb b gnd pulse 0 1.8 0 0.1n 0.1n 20n 40n
+vab bbar gnd pulse 1.8 0 0 0.1n 0.1n 20n 40n
+
+.tran 0.01n 60n
+
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(a) v(b)+2  v(out)+4
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
