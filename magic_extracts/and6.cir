@@ -1,0 +1,123 @@
+* chandini 2024102020
+* SPICE3 file created from and6.ext - technology: scmos
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+Vdd vdd gnd 'SUPPLY'
+
+* AND6 gate transistor network
+M1000 nout f vdd vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1001 a_n20_n101# f gnd Gnd CMOSN w=50 l=2
++  ad=0.25n pd=60u as=0.25n ps=60u
+M1002 out nout gnd Gnd CMOSN w=10 l=2
++  ad=50p pd=30u as=50p ps=30u
+M1003 out nout vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=50u
+M1004 nout f vdd vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1005 a_n8_n101# e a_n20_n101# Gnd CMOSN w=50 l=2
++  ad=0.25n pd=60u as=0.25n ps=60u
+M1006 a_4_n101# d a_n8_n101# Gnd CMOSN w=50 l=2
++  ad=0.25n pd=60u as=0.25n ps=60u
+M1007 vdd e nout vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1008 a_n8_n101_2# c a_4_n101# Gnd CMOSN w=50 l=2
++  ad=0.25n pd=60u as=0.25n ps=60u
+M1009 a_16_n101# b a_n8_n101_2# Gnd CMOSN w=50 l=2
++  ad=0.25n pd=60u as=0.25n ps=60u
+M1010 nout a a_16_n101# Gnd CMOSN w=50 l=2
++  ad=0.25n pd=110u as=0.25n ps=60u
+M1011 nout a vdd vdd CMOSP w=20 l=2
++  ad=100p pd=50u as=100p ps=30u
+M1012 vdd d nout vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1013 vdd c nout vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+M1014 vdd b nout vdd CMOSP w=20 l=2
++  ad=100p pd=30u as=100p ps=30u
+
+* Capacitance values (extended for 6 inputs)
+C0 gnd a_16_n101# 1.13e-19
+C1 gnd a_n20_n101# 1.13e-19
+C2 a a_16_n101# 1.42e-19
+C3 a a_n20_n101# 2.83e-19
+C4 nout gnd 0.062834f
+C5 c gnd 9.67e-19
+C6 a nout 0.071424f
+C7 c a 0.007761f
+C8 d nout 0.083154f
+C9 e b 0.007359f
+C10 d c 0.341485f
+C11 vdd a 0.020915f
+C12 vdd d 0.020915f
+C13 gnd a_n8_n101# 1.13e-19
+C14 out gnd 0.130598f
+C15 a a_n8_n101# 2.83e-19
+C16 b gnd 9.67e-19
+C17 e gnd 0.001936f
+C18 b a 0.510277f
+C19 c nout 0.008926f
+C20 e a 0.007761f
+C21 d b 0.007359f
+C22 vdd nout 1.32495f
+C23 vdd c 0.020915f
+C24 e d 0.176533f
+C25 gnd a_4_n101# 1.13e-19
+C26 a a_4_n101# 2.83e-19
+C27 a gnd 0.05598f
+C28 nout out 0.060313f
+C29 d gnd 9.67e-19
+C30 b nout 0.008926f
+C31 e nout 0.031122f
+C32 c b 0.506518f
+C33 d a 0.007761f
+C34 vdd out 0.243018f
+C35 vdd b 0.020915f
+C36 e c 0.007278f
+C37 vdd e 0.020698f
+C38 gnd a_n8_n101_2# 1.13e-19
+C39 a a_n8_n101_2# 2.83e-19
+C40 f gnd 9.67e-19
+C41 f a 0.007761f
+C42 f b 0.007359f
+C43 f c 0.007278f
+C44 f d 0.176533f
+C45 f e 0.341485f
+C46 f nout 0.008926f
+C47 vdd f 0.020915f
+C48 gnd 0 0.736519f 
+C49 out 0 0.105517f 
+C50 nout 0 0.625451f 
+C51 a 0 0.4646f 
+C52 b 0 0.394239f 
+C53 c 0 0.381196f 
+C54 d 0 0.359481f 
+C55 e 0 0.356293f 
+C56 f 0 0.353105f 
+C57 vdd 0 4.49066f 
+
+* Input voltage sources for 6 inputs
+va a gnd pulse 0 1.8 0 0.1n 0.1n 5n 10n
+vb b gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vc c gnd pulse 0 1.8 0 0.1n 0.1n 20n 40n
+vd d gnd pulse 0 1.8 0 0.1n 0.1n 40n 80n
+ve e gnd pulse 0 1.8 0 0.1n 0.1n 80n 160n
+vf f gnd pulse 0 1.8 0 0.1n 0.1n 160n 320n
+
+* Simulation commands
+.tran 0.01n 320n
+
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(a) v(b)+2 v(c)+4 v(d)+6 v(e)+8 v(f)+10 v(out)+12
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
