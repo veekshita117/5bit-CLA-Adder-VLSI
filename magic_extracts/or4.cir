@@ -1,0 +1,79 @@
+*chandini 2024102020
+* SPICE3 file created from and4.ext - technology: scmos
+
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.option scale=90n
+.global gnd vdd
+
+Vdd vdd gnd 'SUPPLY'
+* SPICE3 file created from or4.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 a_n15_n12# b a_n27_n12# vdd CMOSP w=80 l=2
++  ad=800 pd=180 as=800 ps=180
+M1001 out nout gnd Gnd CMOSN w=10 l=2
++  ad=50 pd=30 as=250 ps=130
+M1002 gnd b nout Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=200 ps=80
+M1003 a_n27_n12# a vdd vdd CMOSP w=80 l=2
++  ad=0 pd=0 as=500 ps=220
+M1004 nout a gnd Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+M1005 nout d a_n3_n12# vdd CMOSP w=80 l=2
++  ad=400 pd=170 as=800 ps=180
+M1006 gnd d nout Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+M1007 a_n3_n12# c a_n15_n12# vdd CMOSP w=80 l=2
++  ad=0 pd=0 as=0 ps=0
+M1008 out nout vdd vdd CMOSP w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1009 nout c gnd Gnd CMOSN w=10 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 gnd nout 0.73fF
+C1 d b 0.08fF
+C2 gnd out 0.10fF
+C3 vdd d 0.06fF
+C4 d a 0.08fF
+C5 d nout 0.16fF
+C6 vdd b 0.06fF
+C7 b a 0.25fF
+C8 b nout 0.23fF
+C9 vdd a 0.06fF
+C10 vdd nout 0.19fF
+C11 a nout 0.05fF
+C12 c d 0.58fF
+C13 vdd out 0.28fF
+C14 c b 0.41fF
+C15 out nout 0.05fF
+C16 vdd c 0.06fF
+C17 c a 0.08fF
+C18 c nout 0.10fF
+C19 gnd a 0.03fF
+C20 gnd Gnd 0.34fF
+C21 out Gnd 0.07fF
+C22 nout Gnd 0.41fF
+C23 d Gnd 0.36fF
+C24 c Gnd 0.34fF
+C25 b Gnd 0.30fF
+C26 a Gnd 0.27fF
+C27 vdd Gnd 8.38fF
+
+va a gnd pulse 0 1.8 0 0.1n 0.1n 5n 10n
+vb b gnd pulse 0 1.8 0 0.1n 0.1n 10n 20n
+vc c gnd pulse 0 1.8 0 0.1n 0.1n 20n 40n
+vd d gnd pulse 0 1.8 0 0.1n 0.1n 40n 80n
+.tran 0.01n 120n
+
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(a) v(b)+2 v(c)+4 v(d)+6 v(out)+8
+set hcopypscolor = 1
+set color0=white
+set color1=black
+.endc
