@@ -1,0 +1,37 @@
+* SPICE3 file created from and2.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 nout b vdd w_n22_n17# pfet w=20 l=2
++  ad=200 pd=60 as=364 ps=214
+M1001 out nout gnd Gnd nfet w=10 l=2
++  ad=50 pd=30 as=214 ps=144
+M1002 out nout vdd w_n22_n17# pfet w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+M1003 vdd a nout w_n22_n17# pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1004 a_n9_n56# b gnd Gnd nfet w=20 l=2
++  ad=200 pd=60 as=0 ps=0
+M1005 nout a a_n9_n56# Gnd nfet w=20 l=2
++  ad=100 pd=50 as=0 ps=0
+C0 out gnd 0.13fF
+C1 a nout 0.19fF
+C2 vdd out 0.23fF
+C3 nout w_n22_n17# 0.11fF
+C4 nout b 0.04fF
+C5 a w_n22_n17# 0.07fF
+C6 a b 0.19fF
+C7 w_n22_n17# b 0.07fF
+C8 nout gnd 0.07fF
+C9 a gnd 0.04fF
+C10 nout out 0.05fF
+C11 vdd nout 0.50fF
+C12 out w_n22_n17# 0.05fF
+C13 vdd w_n22_n17# 0.34fF
+C14 gnd Gnd 0.33fF
+C15 out Gnd 0.08fF
+C16 nout Gnd 0.31fF
+C17 a Gnd 0.26fF
+C18 b Gnd 0.22fF
+C19 vdd Gnd 0.01fF
+C20 w_n22_n17# Gnd 2.43fF

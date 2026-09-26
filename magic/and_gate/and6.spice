@@ -1,0 +1,71 @@
+* SPICE3 file created from and6.ext - technology: scmos
+
+.option scale=0.09u
+
+M1000 a_n45_n53# f gnd Gnd nfet w=50 l=2
++  ad=500 pd=120 as=305 ps=142
+M1001 out vdd vdd vdd pfet w=22 l=2
++  ad=110 pd=54 as=1310 ps=454
+M1002 out vdd gnd Gnd nfet w=11 l=2
++  ad=55 pd=32 as=0 ps=0
+M1003 a_n9_n53# c a_n21_n53# Gnd nfet w=50 l=2
++  ad=500 pd=120 as=500 ps=120
+M1004 a_n21_n53# d a_n33_n53# Gnd nfet w=50 l=2
++  ad=0 pd=0 as=500 ps=120
+M1005 vdd a a_3_n53# Gnd nfet w=50 l=2
++  ad=378 pd=238 as=500 ps=120
+** SOURCE/DRAIN TIED
+M1006 vdd c vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+** SOURCE/DRAIN TIED
+M1007 vdd a vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+** SOURCE/DRAIN TIED
+M1008 vdd d vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1009 a_3_n53# b a_n9_n53# Gnd nfet w=50 l=2
++  ad=0 pd=0 as=0 ps=0
+** SOURCE/DRAIN TIED
+M1010 vdd b vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+M1011 a_n33_n53# e a_n45_n53# Gnd nfet w=50 l=2
++  ad=0 pd=0 as=0 ps=0
+** SOURCE/DRAIN TIED
+M1012 vdd e vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+** SOURCE/DRAIN TIED
+M1013 vdd f vdd vdd pfet w=20 l=2
++  ad=0 pd=0 as=0 ps=0
+C0 f b 0.08fF
+C1 a d 0.08fF
+C2 d e 0.46fF
+C3 vdd c 0.21fF
+C4 vdd b 0.21fF
+C5 gnd out 0.11fF
+C6 a e 0.08fF
+C7 vdd f 0.17fF
+C8 d c 0.63fF
+C9 a gnd 0.04fF
+C10 d b 0.08fF
+C11 a c 0.08fF
+C12 e c 0.08fF
+C13 a b 0.96fF
+C14 e b 0.08fF
+C15 d f 0.08fF
+C16 vdd out 0.40fF
+C17 vdd d 0.21fF
+C18 a f 0.08fF
+C19 e f 0.30fF
+C20 vdd a 0.26fF
+C21 c b 0.79fF
+C22 vdd e 0.30fF
+C23 vdd gnd 0.05fF
+C24 c f 0.08fF
+C25 gnd Gnd 0.53fF
+C26 out Gnd 0.07fF
+C27 a Gnd 0.48fF
+C28 b Gnd 0.44fF
+C29 c Gnd 0.41fF
+C30 d Gnd 0.38fF
+C31 f Gnd 0.14fF
+C32 vdd Gnd 7.56fF
