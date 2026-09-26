@@ -1,0 +1,22 @@
+magic
+tech scmos
+timestamp 1757450759
+<< metal1 >>
+rect -14 87 1039 91
+rect -14 33 -9 87
+rect 3 75 1017 79
+rect 1035 33 1039 87
+rect -14 29 0 33
+rect 1023 29 1039 33
+rect 4 0 1016 6
+use inv  inv_0
+array 0 30 33 0 0 79
+timestamp 1757448314
+transform 1 0 4 0 1 39
+box -4 -39 29 40
+<< labels >>
+rlabel metal1 4 0 1016 6 1 gnd
+rlabel metal1 3 75 1017 79 1 vdd
+rlabel space 1 29 5 33 1 in
+rlabel metal1 1025 29 1029 33 1 out
+<< end >>
