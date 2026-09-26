@@ -120,5 +120,3 @@ ngspice cla_final.cir
 - **TSMC 180nm PDK** (`SCN6M_DEEP.09.tech27` for Magic, `TSMC_180nm.txt` SPICE models for simulation)
 - **ngspice** — transistor-level/post-layout circuit simulation
 
-## Author
-Course project for VLSI Design, Monsoon 2025, IIIT Hyderabad.
