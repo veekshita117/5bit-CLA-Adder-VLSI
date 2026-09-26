@@ -1,0 +1,316 @@
+*chandini 2024102020
+.include TSMC_180nm.txt
+.param SUPPLY=1.8
+.param LAMBDA=0.09u
+.global gnd vdd
+
+vdd vdd gnd DC 1.8
+
+.subckt nmos d g s b W='N'
+.param width_N={W}
+M1 d g s b CMOSN W={width_N} L={2*LAMBDA}
++ AS={5*width_N*LAMBDA} PS={10*LAMBDA+2*width_N}
++ AD={5*width_N*LAMBDA} PD={10*LAMBDA+2*width_N}
+.ends nmos
+
+.subckt pmos d g s b W='P'
+.param width_P={W}
+M1 d g s b CMOSP W={width_P} L={2*LAMBDA}
++ AS={5*width_P*LAMBDA} PS={10*LAMBDA+2*width_P}
++ AD={5*width_P*LAMBDA} PD={10*LAMBDA+2*width_P}
+.ends pmos
+
+* inverter
+.subckt inv y x vdd gnd 
+XM1 y x vdd vdd pmos W='20*LAMBDA'  
+XM2 y x gnd gnd nmos W='10*LAMBDA'
+.ends inv
+
+* 2-input and gate
+.subckt and2 a b out vdd gnd     
+XM1 nout a vdd vdd pmos W='20*LAMBDA' 
+XM2 nout b vdd vdd pmos W='20*LAMBDA'
+XM3 nout a x gnd nmos W='20*LAMBDA'
+XM4  x b gnd gnd nmos W='20*LAMBDA'
+XM5 out nout vdd vdd pmos W='20*LAMBDA' 
+XM6 out nout gnd gnd nmos W='10*LAMBDA'
+.ends and2
+
+* 3-input and gate
+.subckt and3 a b c out vdd gnd
+XM1 nout a vdd vdd pmos W='20*LAMBDA' 
+XM2 nout b vdd vdd pmos W='20*LAMBDA' 
+XM3 nout c vdd vdd pmos W='20*LAMBDA' 
+XM4 nout a x gnd nmos W='30*LAMBDA'  
+XM5  x b y gnd nmos W='30*LAMBDA' 
+XM6 y c gnd gnd nmos W='30*LAMBDA' 
+XM7 out nout vdd vdd pmos W='20*LAMBDA'  
+XM8 out nout gnd gnd nmos W='10*LAMBDA'  
+.ends and3
+
+* 4-input and gate
+.subckt and4 a b c d out vdd gnd
+XM1 nout a vdd vdd pmos W='20*LAMBDA'
+XM2 nout b vdd vdd pmos W='20*LAMBDA'
+XM3 nout c vdd vdd pmos W='20*LAMBDA' 
+XM4 nout d vdd vdd pmos W='20*LAMBDA'
+XM5 nout a x gnd nmos W='40*LAMBDA'
+XM6  x b y gnd nmos W='40*LAMBDA'
+XM7 y c z gnd nmos W='40*LAMBDA'
+XM8 z d gnd gnd nmos W='40*LAMBDA'
+XM9 out nout vdd vdd pmos W='20*LAMBDA' 
+XM10 out nout gnd gnd nmos W='10*LAMBDA'
+.ends and4
+
+* 5-input AND
+.subckt and5 a b c d e out vdd gnd
+XM1 nout a vdd vdd pmos W='20*LAMBDA'
+XM2 nout b vdd vdd pmos W='20*LAMBDA'
+XM3 nout c vdd vdd pmos W='20*LAMBDA' 
+XM4 nout d vdd vdd pmos W='20*LAMBDA'
+XM5 nout e vdd vdd pmos W='20*LAMBDA'
+XM6 nout a w gnd nmos W='50*LAMBDA'
+XM7  w b x gnd nmos W='50*LAMBDA'
+XM8 x c y gnd nmos W='50*LAMBDA'
+XM9 y d z gnd nmos W='50*LAMBDA'
+XM10 z e gnd gnd nmos W='50*LAMBDA'
+XM11 out nout vdd vdd pmos W='20*LAMBDA' 
+XM12 out nout gnd gnd nmos W='10*LAMBDA'
+.ends and5
+
+* 6-input AND
+.subckt and6 a b c d e f out vdd gnd
+XM1 nout a vdd vdd pmos W='20*LAMBDA'
+XM2 nout b vdd vdd pmos W='20*LAMBDA'
+XM3 nout c vdd vdd pmos W='20*LAMBDA' 
+XM4 nout d vdd vdd pmos W='20*LAMBDA'
+XM5 nout e vdd vdd pmos W='20*LAMBDA'
+XM6 nout f vdd vdd pmos W='20*LAMBDA'
+XM7 nout a w gnd nmos W='60*LAMBDA'
+XM8  w b x gnd nmos W='60*LAMBDA'
+XM9 x c y gnd nmos W='60*LAMBDA'
+XM10 y d z gnd nmos W='60*LAMBDA'
+XM11 z e u gnd nmos W='60*LAMBDA'
+XM12 u f gnd gnd nmos W='60*LAMBDA'
+XM13 out nout vdd vdd pmos W='20*LAMBDA' 
+XM14 out nout gnd gnd nmos W='10*LAMBDA'
+.ends and6
+
+* OR gates (implemented with stacked pmos pull-ups)
+.subckt or2 a b out vdd gnd
+XM1 x a vdd vdd pmos W='2*20*LAMBDA' 
+XM2 nout b x vdd pmos W='2*20*LAMBDA' 
+XM3 nout a gnd gnd nmos W='10*LAMBDA'
+XM4 nout b gnd gnd nmos W='10*LAMBDA'
+XM5 out nout vdd vdd pmos W='20*LAMBDA' 
+XM6 out nout gnd gnd nmos W='10*LAMBDA'
+.ends or2
+
+.subckt or3 a b c out vdd gnd
+XM1 x a vdd vdd pmos W='3*20*LAMBDA' 
+XM2 y b x vdd pmos W='3*20*LAMBDA' 
+XM3 nout c y vdd pmos W='3*20*LAMBDA' 
+XM4 nout a gnd gnd nmos W='10*LAMBDA'
+XM5 nout b gnd gnd nmos W='10*LAMBDA'
+XM6 nout c gnd gnd nmos W='10*LAMBDA'
+XM7 out nout vdd vdd pmos W='20*LAMBDA'
+XM8 out nout gnd gnd nmos W='10*LAMBDA'
+.ends or3
+
+.subckt or4 a b c d out vdd gnd
+XM1 x a vdd vdd pmos W='4*20*LAMBDA' 
+XM2 y b x vdd pmos W='4*20*LAMBDA'
+XM3 z c y vdd pmos W='4*20*LAMBDA'
+XM4 nout d z vdd pmos W='4*20*LAMBDA'
+XM5 nout a gnd gnd nmos W='10*LAMBDA'
+XM6 nout b gnd gnd nmos W='10*LAMBDA'
+XM7 nout c gnd gnd nmos W='10*LAMBDA'
+XM8 nout d gnd gnd nmos W='10*LAMBDA'
+XM9 out nout vdd vdd pmos W='20*LAMBDA'
+XM10 out nout gnd gnd nmos W='10*LAMBDA'
+.ends or4
+
+.subckt or5 a b c d e out vdd gnd
+XM1 w a vdd vdd pmos W='5*20*LAMBDA'
+XM2 x b w vdd pmos W='5*20*LAMBDA'
+XM3 y c x vdd pmos W='5*20*LAMBDA' 
+XM4 z d y vdd pmos W='5*20*LAMBDA' 
+XM5 nout e z vdd pmos W='5*20*LAMBDA' 
+XM6 nout a gnd gnd nmos W='10*LAMBDA'
+XM7 nout b gnd gnd nmos W='10*LAMBDA'
+XM8 nout c gnd gnd nmos W='10*LAMBDA'
+XM9 nout d gnd gnd nmos W='10*LAMBDA'
+XM10 nout e gnd gnd nmos W='10*LAMBDA'
+XM11 out nout vdd vdd pmos W='20*LAMBDA' 
+XM12 out nout gnd gnd nmos W='10*LAMBDA'
+.ends or5
+
+.subckt or6 a b c d e f out vdd gnd
+XM1 u a vdd vdd pmos W='6*20*LAMBDA'
+XM2 v b u vdd pmos W='6*20*LAMBDA'
+XM3 w c v vdd pmos W='6*20*LAMBDA'
+XM4 x d w vdd pmos W='6*20*LAMBDA'
+XM5 y e x vdd pmos W='6*20*LAMBDA'
+XM6 nout f y vdd pmos W='6*20*LAMBDA'
+XM7  nout a gnd gnd nmos W='10*LAMBDA'
+XM8  nout b gnd gnd nmos W='10*LAMBDA'
+XM9  nout c gnd gnd nmos W='10*LAMBDA'
+XM10 nout d gnd gnd nmos W='10*LAMBDA'
+XM11 nout e gnd gnd nmos W='10*LAMBDA'
+XM12 nout f gnd gnd nmos W='10*LAMBDA'
+XM13 out nout vdd vdd pmos W='20*LAMBDA'
+XM14 out nout gnd gnd nmos W='10*LAMBDA'
+.ends or6
+
+.subckt xor a b out vdd gnd
+XM13 abar a vdd vdd pmos W='20*LAMBDA'
+XM14 abar a gnd gnd nmos W='10*LAMBDA'
+XM15 bbar b vdd vdd pmos W='20*LAMBDA'
+XM16 bbar b gnd gnd nmos W='10*LAMBDA'
+XM1 p a vdd vdd pmos W='40*LAMBDA' 
+XM2 out bbar p vdd pmos W='40*LAMBDA' 
+XM3 q abar vdd vdd pmos W='40*LAMBDA'
+XM4 out b q vdd pmos W='40*LAMBDA'
+XM5 out a r gnd nmos W='20*LAMBDA'
+XM6 r b gnd gnd nmos W='20*LAMBDA'
+XM7 out abar s gnd nmos W='20*LAMBDA'
+XM8 s bbar gnd gnd nmos W='20*LAMBDA'
+.ends xor
+
+* D flip-flop (TSPC-style)
+.subckt dff d q clk vdd gnd
+XM1 x d gnd gnd nmos W='10*LAMBDA'
+XM2 x clk a vdd pmos W='20*LAMBDA'
+XM3 a d vdd vdd pmos W='20*LAMBDA'
+XM4 b clk gnd gnd nmos W='10*LAMBDA'
+XM5 y x b gnd nmos W='10*LAMBDA'
+XM6 y clk vdd vdd pmos W='20*LAMBDA'
+XM7 c y gnd gnd nmos W='10*LAMBDA'
+XM8 qbar clk c gnd nmos W='10*LAMBDA'
+XM9 qbar y vdd vdd pmos W='20*LAMBDA'
+XM10 q qbar vdd vdd pmos W='20*LAMBDA'
+XM11 q qbar gnd gnd nmos W='10*LAMBDA'
+.ends dff
+
+
+
+x1 a0 b0 g0 vdd gnd and2
+x2 a0 b0 p0 vdd gnd xor
+
+x3 a1 b1 g1 vdd gnd and2
+x4 a1 b1 p1 vdd gnd xor
+
+x5 a2 b2 g2 vdd gnd and2
+x6 a2 b2 p2 vdd gnd xor
+
+x7 a3 b3 g3 vdd gnd and2
+x8 a3 b3 p3 vdd gnd xor
+
+x9 a4 b4 g4 vdd gnd and2
+x10 a4 b4 p4 vdd gnd xor
+
+** Finding carry **
+
+*c1
+x11 p0 c0 p0c0 vdd gnd and2
+x12 g0 p0c0 c1 vdd gnd or2
+
+*c2
+x13 p0 p1 c0 p1p0c0 vdd gnd and3
+x14 p1 g0 p1g0 vdd gnd and2
+x15 g1 p1g0 p1p0c0 c2 vdd gnd or3
+
+*c3
+x16 p2 g1 p2g1 vdd gnd and2
+x17 p2 p1 g0 p2p1g0 vdd gnd and3
+x18 p0 p1 p2 c0 p2p1p0c0 vdd gnd and4
+x19 g2 p2g1 p2p1g0 p2p1p0c0 c3 vdd gnd or4
+
+*c4
+x20 p3 g2 p3g2 vdd gnd and2
+x21 p3 p2 g1 p3p2g1 vdd gnd and3
+x22 p3 p2 p1 g0 p3p2p1g0 vdd gnd and4
+x23 p3 p2 p1 p0 c0 p3p2p1p0c0 vdd gnd and5
+x24 g3 p3g2 p3p2g1 p3p2p1g0 p3p2p1p0c0 c4 vdd gnd or5
+
+*c5
+x25 p4 g3 p4g3 vdd gnd and2
+x26 p4 p3 g2 p4p3g2 vdd gnd and3
+x27 p4 p3 p2 g1 p4p3p2g1 vdd gnd and4
+x28 p4 p3 p2 p1 g0 p4p3p2p1g0 vdd gnd and5
+x29 p4 p3 p2 p1 p0 c0 p4p3p2p1p0c0 vdd gnd and6
+x30 g4 p4g3 p4p3g2 p4p3p2g1 p4p3p2p1g0 p4p3p2p1p0c0 c5 vdd gnd or6
+
+
+* s0
+x31 p0 c0 s0 vdd gnd xor
+*s1
+x32 p1 c1 s1 vdd gnd xor
+*s2
+x33 p2 c2 s2 vdd gnd xor
+*s3
+x34 p3 c3 s3 vdd gnd xor
+*s4
+x35 p4 c4 s4 vdd gnd xor
+
+
+*input A
+x36 a0d a0 clk vdd gnd dff
+x37 a1d a1 clk vdd gnd dff
+x38 a2d a2 clk vdd gnd dff
+x39 a3d a3 clk vdd gnd dff
+x40 a4d a4 clk vdd gnd dff
+*input B
+x41 b0d b0 clk vdd gnd dff
+x42 b1d b1 clk vdd gnd dff
+x43 b2d b2 clk vdd gnd dff
+x44 b3d b3 clk vdd gnd dff
+x45 b4d b4 clk vdd gnd dff
+*input c0
+x46 c0d c0 clk vdd gnd dff
+
+
+*output s3s2s1s0
+x47 s0 s0q clk vdd gnd dff
+x48 s1 s1q clk vdd gnd dff
+x49 s2 s2q clk vdd gnd dff
+x50 s3 s3q clk vdd gnd dff
+x51 s4 s4q clk vdd gnd dff
+*output c5
+x52 c5 c5q clk vdd gnd dff
+
+vclk clk gnd pulse 0 1.8 0 1ns 1ns 10ns 20ns
+
+va0 a0d gnd pulse 0 1.8 0 1ns 1ns 5ns 10ns
+va1 a1d gnd pulse 0 1.8 0 1ns 1ns 10ns 20ns
+va2 a2d gnd pulse 0 1.8 0 1ns 1ns 20ns 40ns
+va3 a3d gnd pulse 0 1.8 0 1ns 1ns 40ns 80ns
+va4 a4d gnd pulse 0 1.8 0 1ns 1ns 80ns 160ns
+
+vb0 b0d gnd pulse 0 1.8 0 1ns 1ns 17ns 34ns
+vb1 b1d gnd pulse 0 1.8 0 1ns 1ns 17ns 34ns
+vb2 b2d gnd pulse 0 1.8 0 1ns 1ns 15ns 30ns
+vb3 b3d gnd pulse 0 1.8 0 1ns 1ns 15ns 30ns
+vb4 b4d gnd pulse 0 1.8 0 1ns 1ns 17ns 34ns
+
+vc0 c0d gnd 0
+
+.tran  0.01n 100ns
+.control
+run
+set hcopypscolor = 1
+set color0 = white   
+set color1 = black   
+set hcopypsfont = "Helvetica"
+plot v(clk) v(a0)+2 v(b0)+4 v(c0)+6 v(s0)+8 v(c1)+10
+plot v(clk) v(a1)+2 v(b1)+4 v(c1)+6 v(s1)+8 v(c2)+10
+plot v(clk) v(a2)+2 v(b2)+4 v(c2)+6 v(s2)+8 v(c3)+10
+plot v(clk) v(a3)+2 v(b3)+4 v(c3)+6 v(s3)+8 v(c4)+10
+plot v(clk) v(a4)+2 v(b4)+4 v(c4)+6 v(s4)+8 v(c5)+10
+
+
+
+set hcopypscolor = 1
+set color1=white
+.endc
+.end
